@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* custom scroll bar */
+*::-webkit-scrollbar {
+  @apply w-[5px];
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    0deg,
+    rgba(255, 65, 104, 1) 0%,
+    rgba(48, 73, 201, 1) 57%
+  );
+  width: 10px;
+  border-radius: 20px;
+}
+
+body {
+  @apply bg-background;
+}
+
+.slimScrollBar::-webkit-scrollbar {
+  width: 4px;
+}
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+  outline: 0px;
+}
+/* swiper js custom css */
+.swiper-pagination-bullet {
+  background-color: #f5c85f !important;
+  opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+  background-color: #f5c85f !important;
+  opacity: 1;
+}
+/* .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  } */
+
+/* navbar custom css */
+
+.navbar {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.8520658263305322) 0%,
+    rgba(97, 29, 0, 1) 36%
+  );
+}
+
+.baseGradient {
+  background: linear-gradient(
+    0deg,
+    rgba(255, 65, 104, 1) 0%,
+    rgba(48, 73, 201, 1) 57%
+  );
+}
+
+.baseGradient90 {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 65, 104, 1) 0%,
+    rgba(48, 73, 201, 1) 57%
+  );
+}
+
+/* transition for border */
+
+/* other css */
+
+.HomePageContainer {
+  @apply min-h-[80px] border-dashed  border-2 border-gray-600 rounded-md  flex items-center mt-3 md:p-3 p-1.5;
+}
+
+.HomeItemsGridContainer {
+  @apply grid md:gap-4 gap-2 grid-cols-3 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3;
+}
+
+.singleItemsHomePage {
+  @apply absolute w-full h-10  mxl:h-auto bg-black bg-opacity-80 backdrop-blur-sm transition-all -bottom-10 opacity-0 group-hover:bottom-0  mxl:bottom-0 group-hover:opacity-100  mxl:opacity-100 rounded-b-xl flex justify-between items-center mxl:text-base msm:text-xs msm:px-[2px] mxl:px-[10px] px-5;
+}
+
+.imgStrictSize {
+  @apply min-h-full max-h-full min-w-full max-w-full;
+}
+.adminTextInput {
+  @apply block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600;
+}
+
+.homePageText {
+  @apply sm:ml-14  font-bold lg:text-2xl md:text-xl text-base;
+}
+.footerSVG {
+  @apply opacity-80 hover:opacity-100 hover:scale-110 transition-all;
+}
