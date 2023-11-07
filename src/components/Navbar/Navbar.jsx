@@ -123,7 +123,7 @@ function Navbar({ showModal, session }) {
             <nav onBlur={navBlur} className=" sm:pl-12 w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
                 <div className="flex items-center justify-between">
                     <div className='w-full pr-4 flex flex-row justify-between items-center' >
-                        <Link to={'/'}>  <img loading="lazy" src={'/assets/imgs/logo.png'} alt="logo" width={100} height={100} className="w-[65px] " /></Link>
+                        <Link preventScrollReset={false} to={'/'}>  <img loading="lazy" src={'/assets/imgs/logo.png'} alt="logo" width={100} height={100} className="w-[65px] " /></Link>
 
 
                         {

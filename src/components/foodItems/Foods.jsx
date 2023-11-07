@@ -7,25 +7,23 @@ import Button from '../Button/Button';
 import { TfiReload } from 'react-icons/tfi';
 
 function Foods() {
-    const [fetch_N, setFetch_N] = useState(18)
+    const incrementOfList = 18
+    const [fetch_N, setFetch_N] = useState(incrementOfList)
 
-    const { isLoading, error, data, refetch, isRefetching } = useQuery('cuisinesAll', () =>
-        fetch(baseURL + "/cuisines/" + (fetch_N).toString(),).then(res =>
+
+    const { isLoading, error, data, refetch, isRefetching } = useQuery('cuisinesAll' + fetch_N, () =>
+        fetch(baseURL + "/cuisines/" + (fetch_N).toString()).then(res =>
             res.json()
-        ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        )
     )
     const cuisines = data?.cuisineList || [];
 
-    useEffect(() => {
-        refetch()
-    }, [fetch_N])
+    function getMore() {
+        setFetch_N(p => {
+            return + p + incrementOfList
+        })
+    }
 
-
-    console.log(isLoading)
 
     return (
         <div className="  mt-7 "  >
@@ -56,7 +54,7 @@ function Foods() {
 
             </div>
             <div className='flex items-center justify-center h-10 w-full mt-5' >
-                <Button disabled={isRefetching || (fetch_N > cuisines?.length)} onClick={() => setFetch_N(p => +p + 18)} >
+                <Button disabled={isRefetching || (fetch_N > cuisines?.length)} onClick={getMore} >
                     {(fetch_N > cuisines?.length && !isRefetching) ? "No more left" : <> Show more <TfiReload /> </>}
                 </Button>
             </div>

@@ -22,10 +22,7 @@ function Admins() {
         fetch(baseURL + "/restaurants/").then(res =>
             res.json()
         ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        //--------
     )
 
     useEffect(() => {

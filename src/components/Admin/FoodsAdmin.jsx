@@ -15,14 +15,10 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
     const restaurantList = restaurants?.restaurantList || [];
     // //getting all restaurant
     const { isLoading, error, data, refetch } = useQuery('allCuisines', () =>
-        fetch(baseURL + "/cuisines/").then(res =>
+        fetch(baseURL + "/cuisines/10000000").then(res =>
             res.json()
         ),
-        {
-            // You can add more options as needed:
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        //--------
     )
 
     const foodList = data?.cuisineList || [];

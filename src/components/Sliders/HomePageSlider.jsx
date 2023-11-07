@@ -15,10 +15,7 @@ function HomePageSlider() {
         fetch(baseURL + "/sliders").then(res =>
             res.json()
         ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        //--------
     )
 
     useEffect(() => {

@@ -6,17 +6,10 @@ import Loader from "../components/Loaders/Loader";
 
 function Restaurant() {
     const params = useParams();
-
-
-
-    const { isLoading, error, data, refetch } = useQuery('singleRestaurant' + params?.restaurantId, () =>
+    const { isLoading, data } = useQuery('singleRestaurant' + params?.restaurantId, () =>
         fetch(baseURL + "/restaurants/" + params.restaurantId).then(res =>
             res.json()
-        ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        )
     )
 
     const { closeAt, picture, cuisines, name } = data?.restaurant || {};

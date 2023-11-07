@@ -14,11 +14,7 @@ function Food() {
     const { isLoading, error, data, refetch } = useQuery('singleCuisine' + params.foodId, () =>
         fetch(baseURL + "/cuisinesOne/" + params.foodId).then(res =>
             res.json()
-        ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        )
     )
     const { cuisineImg, isExclusive, availableAt, findWith, name, price, } = data?.cuisine || {};
 
@@ -30,11 +26,6 @@ function Food() {
         name: name
     }
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setShow(true);
-    //     }, 10);
-    // })
 
 
     if (isLoading) return <Loader />;

@@ -6,7 +6,7 @@ function SingleFood({ name, picture, id, isExclusive }) {
 
 
     return (
-        <Link to={`/foods/${id}`} >
+        <Link preventScrollReset={false} to={`/foods/${id}`} >
 
             <div className={`group relative hover:scale-105 transition-all overflow-hidden `} >
                 <div className="  bg-white shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] overflow-hidden">
@@ -20,12 +20,12 @@ function SingleFood({ name, picture, id, isExclusive }) {
 
                 </div>
 
-                {isExclusive && <div className="absolute  top-4 mlg:top-0 left-0 min-w-10 min-h-6 bg-primary rounded-r-md mlg:rounded-tl-md mlg:rounded-tr-none text-red-600 font-bold text-lg px-2  msm:text-xs mlg:text-sm italic" >
+                {isExclusive && <div className="absolute  top-4 mlg:top-0 left-0 min-w-10 min-h-6 bg-primary rounded-r-md mlg:rounded-tl-md mlg:rounded-tr-none text-red-600 font-bold text-lg px-2  msm:text-xs mlg:text-sm mxl:text-sm italic" >
                     Exclusive
                 </div>}
 
-                <div className="singleItemsHomePage" >
-                    {name?.length > 20 ? name?.slice(0, 14) + "..." : name}
+                <div className=" singleItemsHomePage " >
+                    {name?.length > 12 ? name?.slice(0, 12) + "..." : name}
 
                     <span className="msm:hidden" >   <BiRightArrowCircle className="scale-125" /></span>
                 </div>

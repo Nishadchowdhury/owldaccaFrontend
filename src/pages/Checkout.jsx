@@ -68,10 +68,7 @@ function Checkout() {
         fetch(baseURL + "/cuisinesOne/" + params.checkoutType).then(res =>
             res.json()
         ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        //--------
     )
     const { cuisineImg, isExclusive, availableAt, findWith, name, price, } = data?.cuisine || {};
 

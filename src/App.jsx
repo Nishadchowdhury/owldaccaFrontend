@@ -9,15 +9,44 @@ import Restaurant from './pages/Restaurant';
 import Food from './pages/Food';
 import Checkout from './pages/Checkout';
 import Login from './pages/Login';
-const queryClient = new QueryClient()
+
 import { createContext, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Admins from './pages/Admins';
 import svgLoader from "/assets/svgs/initialLoading.svg"
+import { createWebStoragePersistor } from "react-query/createWebStoragePersistor-experimental"
+import { persistQueryClient } from "react-query/persistQueryClient-experimental"
 
 let userContext = createContext(null)
 let modalContext = createContext(null)
+
+const expireAfter = 60000 * 10
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: expireAfter,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: 2,
+      retryDelay: 3000
+    }
+  }
+})
+
+
+
+
+const localStoragePersistor = createWebStoragePersistor({
+  storage: window.localStorage,
+})
+
+persistQueryClient({
+  queryClient,
+  persistor: localStoragePersistor,
+})
+
 
 function App() {
   const [users, setUser] = useState({ firebaseUser: {}, DBUser: {}, userCart: 0 })
@@ -49,7 +78,7 @@ function App() {
 
             <Router>
               <NavBarWrapper />
-              <Routes>
+              <Routes preventScrollReset={false} >
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
 

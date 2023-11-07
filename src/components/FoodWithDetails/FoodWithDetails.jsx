@@ -38,7 +38,7 @@ function FoodWithDetails({ cuisineImg, price, availableAt, isExclusive, name, qu
                     <div className="relative w-3/4 flex flex-row gap-3">
                         {!show && <div className=" absolute h-full w-full bg-red-500 bg-opacity-80 backdrop-blur-2xl flex items-center justify-center" > This item is not available, please delete it from your cart. </div>}
                         <div className="w-2/6 h-fit rounded-md overflow-hidden my-auto">
-                            <img loading="lazy" src={cuisineImg} onError={imgFailed} alt="cuisineImg" className="imgStrictSize rounded-md overflow-hidden" />
+                            <img loading="lazy" src={cuisineImg} onError={imgFailed} alt="cuisineImg" className="imgStrictSize rounded-md overflow-hidden msm:max-h-16" />
                         </div>
 
                         <div className="max-w-[200px] msm:w-[160px]" >

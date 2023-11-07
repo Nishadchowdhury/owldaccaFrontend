@@ -22,7 +22,7 @@ function ManageAdmins({ adminEmail }) {
         ),
         {
             // You can add more options as needed:
-            staleTime: (60000 * 60) * 24,
+            staleTime: (60000 * 60) * 24 * 3,
             refetchOnWindowFocus: false,
         }
     )
@@ -32,7 +32,7 @@ function ManageAdmins({ adminEmail }) {
         ),
         {
             // You can add more options as needed:
-            staleTime: (60000 * 60) * 24,
+            staleTime: (60000 * 60) * 24 * 3,
             refetchOnWindowFocus: false,
         }
     )

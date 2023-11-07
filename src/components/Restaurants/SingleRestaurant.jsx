@@ -5,7 +5,7 @@ function SingleRestaurant({ name, picture, id, }) {
 
 
     return (
-        <Link to={`/restaurant/${id}`} >
+        <Link preventScrollReset={false} to={`/restaurant/${id}`} >
 
             <div className="group relative hover:scale-105 transition-all overflow-hidden" >
                 <div className="bg-white shadow-sm rounded-xl overflow-hidden">
@@ -15,9 +15,9 @@ function SingleRestaurant({ name, picture, id, }) {
                         src={picture}
                     />
                 </div>
-                <div className="singleItemsHomePage" >
-                    {name?.length > 18 ? name?.slice(0, 14) + "..." : name}
-                    <span className="msm:hidden" > <BiRightArrowCircle className="scale-125" /> </span>
+                <div className="singleItemsHomePage " >
+                    {name?.length > 14 ? name?.slice(0, 13) + "..." : name}
+                    <span className="msm:hidden " > <BiRightArrowCircle className="scale-125" /> </span>
                 </div>
             </div>
         </Link>

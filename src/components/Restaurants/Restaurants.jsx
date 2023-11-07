@@ -6,20 +6,11 @@ import Loader from '../Loaders/Loader';
 
 function Restaurants() {
 
-    const { isLoading, error, data, refetch } = useQuery(
-        'repoData',
-        () =>
-            fetch(baseURL + '/restaurants', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then((res) => res.json()),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
-    );
-
+    const { isLoading, data } = useQuery('restaurantsAll', () =>
+        fetch(baseURL + '/restaurants').then(res =>
+            res.json()
+        )
+    )
     const restaurants = data?.restaurantList || [];
 
     return (

@@ -8,10 +8,7 @@ function ExclusiveFoods() {
         fetch(baseURL + "/cuisines/1000000000").then(res =>
             res.json()
         ),
-        {
-            staleTime: (60000 * 60) * 24,
-            refetchOnWindowFocus: false,
-        }
+        //--------
     )
     const cuisines = data?.cuisineList || [];
 

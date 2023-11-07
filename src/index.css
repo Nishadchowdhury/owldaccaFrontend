@@ -100,7 +100,7 @@ input:-webkit-autofill:active {
 }
 
 .singleItemsHomePage {
-  @apply absolute w-full h-10  mxl:h-auto bg-black bg-opacity-80 backdrop-blur-sm transition-all -bottom-10 opacity-0 group-hover:bottom-0  mxl:bottom-0 group-hover:opacity-100  mxl:opacity-100 rounded-b-xl flex justify-between items-center mxl:text-base msm:text-xs msm:px-[2px] mxl:px-[10px] px-5;
+  @apply absolute w-full h-10  mxl:h-auto bg-black bg-opacity-80 backdrop-blur-sm transition-all -bottom-10 opacity-0 group-hover:bottom-0  mxl:bottom-0 group-hover:opacity-100  mxl:opacity-100 rounded-b-xl flex justify-between items-center  msm:text-xs msm:px-[2px] mxl:px-[10px] px-5 mxl:text-sm m2xl:text-base;
 }
 
 .imgStrictSize {
