@@ -48,8 +48,8 @@ function CartModal({ visible, showModal }) {
 
 
     return (
-        <div className="fixed inset-0 z-[200] text-white bg-background bg-opacity-75 backdrop-blur-md flex justify-center items-center" >
-            <div className=" hs-overlay-open:opacity-100 hs-overlay-open:duration-500 transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto mxs:scale-[0.85]">
+        <div className="fixed inset-0 z-[200] text-white bg-background bg-opacity-75 backdrop-blur-md center" >
+            <div className=" w-full hs-overlay-open:opacity-100 hs-overlay-open:duration-500 transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto mxs:scale-[0.85]">
 
                 <div className="  flex flex-col my-10 h-auto bg-slate-900  shadow-sm rounded-xl "  >
                     <div className="flex justify-between items-center py-3 px-4 ">
@@ -70,7 +70,7 @@ function CartModal({ visible, showModal }) {
                     </div>
                     <div className="flex justify-between pl-7 text-primary">
                         <div className="flex flex-row justify-between" >
-                            <div className="flex justify-center items-center">
+                            <div className="center">
                                 <span className="w-2 h-2 inline-block bg-green-500 rounded-full mr-2 dark:bg-white"></span>
 
                                 <span >Total:</span>

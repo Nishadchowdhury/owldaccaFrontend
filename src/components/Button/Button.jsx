@@ -7,7 +7,7 @@ function Button({ className, onClick, children, type, ...rest }) {
 
             onClick={onClick}
             type={type ? type : "button"}
-            className={`py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-gray-800 font-semibold   focus:ring-gray-800 transition-all text-sm hover:rounded-full  disabled:opacity-50  ${className}`}
+            className={`py-3 px-4 inline-flex center gap-2 rounded-md border border-gray-800 font-semibold focus:ring-gray-800 transition-all text-sm hover:rounded-full disabled:opacity-50 ${className}`}
             {...rest}
         >
 

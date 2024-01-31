@@ -6,6 +6,8 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import { auth } from "../../firebase.config";
 import { baseURL } from "../../hooks/envCheck";
 import { userContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 async function createUserInDB(name, email, phone) {
 
@@ -30,6 +32,23 @@ async function createUserInDB(name, email, phone) {
 }
 
 function CreateUser() {
+    const navigate = useNavigate();
+
+    const loginSuccessful = () => toast.success("Login Successful", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        closeButton: false,
+        progress: undefined,
+        theme: "dark",
+        className: "bg-[#00FFFF] text-black border-2 border-background "
+    });
+
+
+
 
     let { users, setUser } = useContext(userContext);
     //react firebase hooks functionality
@@ -68,6 +87,17 @@ function CreateUser() {
             await updateProfile({ displayName: `${name.value} * ${phone.value}`, })
         }
     }
+
+    useEffect(() => {
+        if (user?.user?.email) {
+            const status = localStorage.getItem("userFromCheckout")
+            localStorage.removeItem("userFromCheckout");
+            loginSuccessful()
+            setTimeout(() => {
+                navigate(status ? -1 : '/');
+            }, 500);
+        }
+    }, [user])
 
     return (
 

@@ -2,60 +2,62 @@ import SingleFood from './SingleFood'
 import { baseURL } from "../../hooks/envCheck";
 import { useQuery } from "react-query";
 import Loader from '../Loaders/Loader';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import { TfiReload } from 'react-icons/tfi';
+import { userContext } from '../../App';
 
 function Foods() {
-    const incrementOfList = 18
-    const [fetch_N, setFetch_N] = useState(incrementOfList)
+    const { users, setUser } = useContext(userContext);
+    const { queryN } = users
+    const [cuisines, setCuisines] = useState([])
 
 
-    const { isLoading, error, data, refetch, isRefetching } = useQuery('cuisinesAll' + fetch_N, () =>
-        fetch(baseURL + "/cuisines/" + (fetch_N).toString()).then(res =>
+    const { isLoading, data, refetch, isRefetching } = useQuery('cuisinesAll' + queryN, () =>
+        fetch(baseURL + "/cuisines/" + (queryN).toString()).then(res =>
             res.json()
         )
     )
-    const cuisines = data?.cuisineList || [];
+
 
     function getMore() {
-        setFetch_N(p => {
-            return + p + incrementOfList
-        })
+        setUser(p => ({ ...p, queryN: queryN + 18 }))
+        refetch()
     }
 
 
+    useEffect(() => {
+        setCuisines(data?.cuisineList || []);
+    }, [data])
+
+
+
     return (
-        <div className="  mt-7 "  >
+        <div className="mt-7"  >
             <h1 className="homePageText"> {`All Cuisines`} </h1>
 
             <div className="HomePageContainer">
 
                 <div className='HomeItemsGridContainer ' >
-
                     {
                         cuisines && cuisines.map(({ cuisineId, cuisineData }) => (
 
                             <SingleFood isExclusive={cuisineData.isExclusive} picture={cuisineData.cuisineImg} name={cuisineData.name} id={cuisineId} key={cuisineId} />
 
                         ))
-
                     }
 
                     {isRefetching && <Loader />}
 
                 </div>
 
-                {
-                    isLoading && <Loader />
-
-                }
+                {isLoading && <Loader />}
 
 
             </div>
             <div className='flex items-center justify-center h-10 w-full mt-5' >
-                <Button disabled={isRefetching || (fetch_N > cuisines?.length)} onClick={getMore} >
-                    {(fetch_N > cuisines?.length && !isRefetching) ? "No more left" : <> Show more <TfiReload /> </>}
+                <Button disabled={isRefetching || (queryN > cuisines?.length)} onClick={getMore} >
+                    {(queryN > cuisines?.length && !isRefetching) ? "No more left" : <> Show more <TfiReload /> </>}
                 </Button>
             </div>
 

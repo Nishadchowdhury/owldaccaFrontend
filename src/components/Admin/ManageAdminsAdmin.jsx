@@ -91,7 +91,7 @@ function ManageAdmins({ adminEmail }) {
 
 
             <button className="hs-accordion-toggle  group py-3 inline-flex items-center justify-between gap-x-3 w-full font-semibold  transition  hs-accordion-active:border-b border-slate-600 text-center" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
-                <h1 className="text-center w-full flex justify-center items-center gap-3 " >Manage Admins <span className="text-primary "><RiAdminLine /></span> </h1>
+                <h1 className="text-center w-full center gap-3 " >Manage Admins <span className="text-primary "><RiAdminLine /></span> </h1>
                 <svg className="hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 block w-3 h-3 text-gray-600 group-hover:" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>

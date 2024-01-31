@@ -41,7 +41,7 @@ function Restaurant() {
 
                         </div>
 
-                        <div className="lg:w-3/5 xl:w-2/3 2xl:w-2/3 mt-4  ">
+                        <div className="lg:w-3/5 xl:w-2/3 2xl:w-2/3 w-full mt-4 ">
 
                             {cuisines?.map(({ cuisineImg, price, availableAt, isExclusive, name }) => (
                                 <FoodWithDetails key={name + price + cuisineImg}

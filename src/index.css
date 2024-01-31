@@ -32,6 +32,10 @@ body {
   @apply bg-background;
 }
 
+.center {
+  @apply flex justify-center items-center;
+}
+
 .slimScrollBar::-webkit-scrollbar {
   width: 4px;
 }

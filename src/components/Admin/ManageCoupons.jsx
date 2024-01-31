@@ -190,7 +190,7 @@ function ManageCoupons({ adminEmail }) {
 
 
             <button className="hs-accordion-toggle  group py-3 inline-flex items-center justify-between gap-x-3 w-full font-semibold  transition  hs-accordion-active:border-b border-slate-600 text-center" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
-                <h1 className="text-center w-full flex justify-center items-center gap-3" >Manage Coupons <span ><BsPostcardHeart /></span> </h1>
+                <h1 className="text-center w-full center gap-3" >Manage Coupons <span ><BsPostcardHeart /></span> </h1>
                 <svg className="hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 block w-3 h-3 text-gray-600 group-hover:" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
@@ -372,7 +372,7 @@ function ManageCoupons({ adminEmail }) {
 
                                                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium  uppercase">Total use</th>
 
-                                                        <th scope="col" className="px-6 py-3 text-right text-xs font-medium  uppercase flex justify-center items-center">Status</th>
+                                                        <th scope="col" className="px-6 py-3 text-right text-xs font-medium  uppercase center">Status</th>
 
                                                         <th scope="col" className="px-6 py-3 text-right text-xs font-medium  uppercase">Action</th>
                                                     </tr>
@@ -397,7 +397,7 @@ function ManageCoupons({ adminEmail }) {
 
                                                                 </td>
 
-                                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-center items-center">
+                                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium center">
                                                                     <button disabled={loading} onClick={async () => updateTheCoupon(couponData, couponId)} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 min-w-[100px]  ${isActive ? "text-green-600" : "text-red-600"} ${loading && "opacity-40"}`} href="#">{isActive ? "Active" : "Inactive"}</button>
                                                                 </td>
 
