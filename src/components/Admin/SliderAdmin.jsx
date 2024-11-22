@@ -30,15 +30,13 @@ function SliderAdmin({ adminEmail }) {
         }
     )
     useEffect(() => {
-        setImagesForSlider(data?.sliders)
+        setImagesForSlider(data?.sliders.slider)
     }, [data])
 
 
     const setSliderImg = function (event) {
         imageValidation(event, 120, setImgSlider, setDataImgSlider, setImgFileSlider, "10:3");
     };
-
-
 
     async function addSlider(e) {
         e.preventDefault()
@@ -87,11 +85,6 @@ function SliderAdmin({ adminEmail }) {
     }
 
 
-
-
-
-
-
     async function deleteSlider(id, status) {
         const ask = window.confirm(`do you want to delete a slider image?`)
 
@@ -118,8 +111,7 @@ function SliderAdmin({ adminEmail }) {
 
     }
 
-
-
+    console.log(imagesForSlider);
 
     return (
         <div className="hs-accordion  bg-slate-800 rounded-xl px-3 mt-5" id="hs-basic-with-title-and-arrow-stretched-heading-two">
@@ -184,7 +176,7 @@ function SliderAdmin({ adminEmail }) {
                 </div>
 
                 <div className="w-full baseGradient90 h-10 rounded-full flex items-center justify-center mt-3" >
-                    <p className="text-center text-white" >This site have total {imagesForSlider?.length} sliders.</p>
+                    <p className="text-center text-white" >This site has total {imagesForSlider?.length} sliders.</p>
                 </div>
 
                 <div className="flex flex-col">
@@ -202,7 +194,7 @@ function SliderAdmin({ adminEmail }) {
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                                         {
-                                            imagesForSlider && imagesForSlider.map(({ src, active }) => (
+                                            imagesForSlider && imagesForSlider?.map((src) => (
                                                 <tr key={src} className="">
                                                     <td className="mmd:px-1 mmd:py-1  px-6 w-full md:w-[300px] py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                         <img loading="lazy" className="imgStrictSize" src={src} alt="" />
@@ -211,7 +203,7 @@ function SliderAdmin({ adminEmail }) {
 
 
                                                     <td className="mmd:px-1 mmd:py-1  px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <button disabled={loading} onClick={async () => deleteSlider(src, active)} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">Delete</button>
+                                                        <button disabled={loading} onClick={async () => deleteSlider(src)} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">Delete</button>
                                                     </td>
 
 

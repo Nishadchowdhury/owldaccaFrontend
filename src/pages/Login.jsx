@@ -112,31 +112,10 @@ function Login() {
 
                 <h1 className="text-3xl mb-8 mlg:mb-2" >{loginMode ? "Login" : "Sign in"} with</h1>
 
-                <div className='w-full ' >
-                    <div className='m lg:w-1/2 mx-auto  ' >
-                        {loginMode ?
-
-                            <Form className="flex mx-auto w-3/4 flex-col items-center justify-center " >
-
-                                <Input className={"my-3 m-2 w-full p-3 bg-transparent border "}
-                                    onChange={setEmail} value={email.value} placeholder={"email"} type={"email"} name={"email"} required={true}
-                                />
-
-
-
-                                <Input className={"my-3 m-2 w-full p-3 bg-transparent border "}
-                                    onChange={setPassword} value={password.value} placeholder={"password"} type={"password"} name={"password"} required={true} />
-
-
-                                <Input type={'submit'} submit={submitLogin} placeholder={"Login"} className={`text-white w-full p-3 cursor-pointer border transition-all duration-1000 ${loading && "opacity-30"}`} />
-                            </Form>
-                            :
-                            <>  <CreateUser /> </>
-                        }
-                    </div>
-
+                <div className='w-full h-full flex items-center justify-center' >
+                   
                     <div className='lg:w-1/2 mx-auto flex flex-col items-center justify-center  ' >
-                        <div className='mb-1' >
+                        <div className='mb-1 hidden' >
                             <span className=' inline-block w-20 h-0.5  bg-primary -translate-y-[3px] mx-6  '>
                             </span>
                             <span>OR</span>
@@ -147,7 +126,7 @@ function Login() {
                         <div className='h-auto msm:w-full mmd:w-4/5 w-3/4 ' >
                             <PopUpLogin navigate={navigate} loginSuccessful={loginSuccessful} />
 
-                            <h1 className='text-center mt-2 cursor-default' > {loginMode ? "New here?" : " Already have an account? "} <strong className='cursor-pointer hover:underline' onClick={() => setLoginMode((prev) => !prev)} >{loginMode ? " Create an account" : " Log in"}</strong>  </h1>
+                            <h1 className='text-center mt-2 cursor-default hidden' > {loginMode ? "New here?" : " Already have an account? "} <strong className='cursor-pointer hover:underline' onClick={() => setLoginMode((prev) => !prev)} >{loginMode ? " Create an account" : " Log in"}</strong>  </h1>
                         </div>
 
 

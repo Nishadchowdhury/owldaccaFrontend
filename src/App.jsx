@@ -21,7 +21,7 @@ import { persistQueryClient } from "react-query/persistQueryClient-experimental"
 let userContext = createContext(null)
 let modalContext = createContext(null)
 
-const expireAfter = 60000 * 10
+const expireAfter = /*60000 * 10*/ 0
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,14 +36,14 @@ const queryClient = new QueryClient({
 })
 
 
-const localStoragePersistor = createWebStoragePersistor({
-  storage: window.localStorage,
-})
+// const localStoragePersistor = createWebStoragePersistor({
+//   storage: window.localStorage,
+// })
 
-persistQueryClient({
-  queryClient,
-  persistor: localStoragePersistor,
-})
+// persistQueryClient({
+//   queryClient,
+//   persistor: localStoragePersistor,
+// })
 
 
 function App() {
@@ -70,7 +70,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <div className={` font-font font-thin min-h-screen  bg-background text-[#00FFFF] ${(hidden || !overflowToggle) && "overflow-hidden h-screen "}`} >
 
-            
+
             <div className={`fixed inset-0 z-[200] text-white bg-background bg-opacity-75 h-[100vh] backdrop-blur-2xl 
           flex items-center justify-center transition-all duration-[1000ms] ${classesOfLoader}`}  >
               <embed className='opacity-70 lg:scale-150  scale-100 msm:scale-75' src={svgLoader} />

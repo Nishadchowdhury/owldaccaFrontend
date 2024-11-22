@@ -111,6 +111,7 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
                 body: formData,
             })
             const uploadedImgFood = await statusOfUploadImageFood.json()
+
             if (!uploadedImgFood.status === 201) {
                 return window.alert('an error ocurred while uploading the image')
             }
@@ -164,9 +165,6 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
 
 
     const deleteAFood = async ({ id, name, image, data }) => {
-
-
-
         const ask = window.confirm(`do you want to delete __${name}__ write ${name} here.`)
 
         function getImgName(url) {

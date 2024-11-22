@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { BsShop } from "react-icons/bs";
 
 function RestaurantsAdmin({ data, refetch }) {
+
     const { users } = useContext(userContext) || {}
     const user = users?.firebaseUser;
     const navigate = useNavigate();

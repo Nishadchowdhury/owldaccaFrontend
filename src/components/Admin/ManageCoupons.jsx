@@ -46,8 +46,7 @@ function ManageCoupons({ adminEmail }) {
 
     const coupons = data?.coupons || [];
 
-
-
+    
 
     useEffect(() => {
 
@@ -187,8 +186,6 @@ function ManageCoupons({ adminEmail }) {
 
     return (
         <div className="hs-accordion  bg-slate-800 rounded-xl px-3 mt-5" id="hs-basic-with-title-and-arrow-stretched-heading-two">
-
-
             <button className="hs-accordion-toggle  group py-3 inline-flex items-center justify-between gap-x-3 w-full font-semibold  transition  hs-accordion-active:border-b border-slate-600 text-center" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
                 <h1 className="text-center w-full center gap-3" >Manage Coupons <span ><BsPostcardHeart /></span> </h1>
                 <svg className="hs-accordion-active:hidden hs-accordion-active:text-blue-600 hs-accordion-active:group-hover:text-blue-600 block w-3 h-3 text-gray-600 group-hover:" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -199,9 +196,6 @@ function ManageCoupons({ adminEmail }) {
                 </svg>
             </button>
             <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
-
-
-
 
                 <div className="flex w-full justify-center ">
                     <div className="  rounded-lg transition p-1   flex justify-center w-full">

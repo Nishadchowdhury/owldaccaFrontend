@@ -2,6 +2,7 @@ import SingleFood from './SingleFood'
 import { baseURL } from "../../hooks/envCheck";
 import { useQuery } from "react-query";
 import Loader from '../Loaders/Loader';
+import { LoadElement } from '../Restaurants/Restaurants';
 
 function ExclusiveFoods() {
     const { isLoading, error, data, refetch } = useQuery('cuisinesAllExclusive', () =>
@@ -35,7 +36,9 @@ function ExclusiveFoods() {
                 </div>
 
                 {
-                    isLoading && <Loader />
+                    isLoading && <>
+                        <LoadElement />
+                    </>
 
                 }
             </div>
@@ -45,6 +48,5 @@ function ExclusiveFoods() {
     );
 }
 export default ExclusiveFoods
-
 
 

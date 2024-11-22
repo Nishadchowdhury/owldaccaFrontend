@@ -15,7 +15,6 @@ import { userContext } from "../App";
 import Input from "../components/Inputs/Input";
 import { toast } from "react-toastify"
 import externalLink from "/assets/svgs/externalLink.svg"
-import generateAnEmail from "../hooks/generateAnaemail"
 import CheckOutPageFood from "../components/CheckoutPageFood/CheckOutPageFood"
 
 function Checkout() {
@@ -178,46 +177,45 @@ function Checkout() {
     }, [params, data, coupon])
 
 
-    // sending email after complete the order.
     async function sendEmail(email) {
+        try {
+            const emailObj = {
+                coupon: couponObject?.prize ? `${coupon.value} - ${couponObject.prize} Taka` : 'xxxxxxxx',
+                address: "" + area + ", " + homeAndStreetAddress + ", " + (apartmentNo ? apartmentNo : ""),
+                buyerName: buyerName,
+                foods,
+                total: (totalPrice - (couponObject?.prize || 0)) + DeliveryFee,
+                delivery: `${area} - ${DeliveryFee} Taka`,
+                phone: phone
+            }
 
-        const emailObj = {
-            coupon: couponObject?.prize ? `${coupon.value} - ${couponObject.prize} Taka` : 'xxxxxxxx',
-            address: "" + area + ", " + homeAndStreetAddress + ", " + (apartmentNo ? apartmentNo : ""),
-            buyerName: buyerName,
-            foods,
-            total: (totalPrice - (couponObject?.prize || 0)) + DeliveryFee,
-            delivery: `${area} - ${DeliveryFee} Taka`,
-            phone: phone
+            notify(email)
+            const emailSendingState = await fetch(`${baseURL}/sendMail`, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': "*",
+                    "Access-Control-Allow-Headers": "*"
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify({ email, emailObj })
+            })
+            const responseData = await emailSendingState.json()
+            console.log(responseData)
 
+            if (responseData?.status) {
+                update(email)
+                console.log("Done")
+
+                setTimeout(() => {
+                    navigate("/")
+                }, 1500);
+            }
+            return emailSendingState;
+        } catch (error) {
+            console.log(error)
         }
-
-        const html = generateAnEmail(emailObj);
-
-        // return console.log(html)
-        notify(email)
-        const emailSendingState = await fetch(`${baseURL}/sendMail`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                'Access-Control-Allow-Origin': "https://owldaccabd.com",
-
-            },
-            body: JSON.stringify({ email, html })
-        })
-        const responseData = await emailSendingState.json()
-        console.log(responseData)
-
-        if (responseData?.status) {
-            update(email)
-            console.log("Done")
-
-            setTimeout(() => {
-                navigate("/")
-            }, 1500);
-        }
-        return emailSendingState;
     }
 
     return (
@@ -401,3 +399,45 @@ function Checkout() {
     )
 }
 export default Checkout
+
+
+// async function sendEmail(email) {
+
+//     const emailObj = {
+//         coupon: couponObject?.prize ? `${coupon.value} - ${couponObject.prize} Taka` : 'xxxxxxxx',
+//         address: "" + area + ", " + homeAndStreetAddress + ", " + (apartmentNo ? apartmentNo : ""),
+//         buyerName: buyerName,
+//         foods,
+//         total: (totalPrice - (couponObject?.prize || 0)) + DeliveryFee,
+//         delivery: `${area} - ${DeliveryFee} Taka`,
+//         phone: phone
+
+//     }
+
+//     const html = generateAnEmail(emailObj);
+
+//     // return console.log(html)
+//     notify(email)
+//     const emailSendingState = await fetch(`${baseURL}/sendMail`, {
+//         method: "POST",
+//         headers: {
+//             "Accept": "application/json",
+//             "Content-Type": "application/json",
+//             'Access-Control-Allow-Origin': "https://owldaccabd.com",
+
+//         },
+//         body: JSON.stringify({ email, html })
+//     })
+//     const responseData = await emailSendingState.json()
+//     console.log(responseData)
+
+//     if (responseData?.status) {
+//         update(email)
+//         console.log("Done")
+
+//         setTimeout(() => {
+//             navigate("/")
+//         }, 1500);
+//     }
+//     return emailSendingState;
+// }

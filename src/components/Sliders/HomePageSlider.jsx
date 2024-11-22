@@ -19,7 +19,7 @@ function HomePageSlider() {
     )
 
     useEffect(() => {
-        setImagesForSlider(data?.sliders);
+        setImagesForSlider(data?.sliders?.slider || []);
     }, [data])
 
 
@@ -55,7 +55,7 @@ function HomePageSlider() {
                                 <div className=" overflow-hidden flex items-center justify-center ">
                                     <Link to='/' >
                                         <img loading="lazy"
-                                            src={image?.src}
+                                            src={image}
                                             alt="sliderImage"
                                             className="min-w-full max-w-full hover:scale-105 transition-all object-cover"
                                         />

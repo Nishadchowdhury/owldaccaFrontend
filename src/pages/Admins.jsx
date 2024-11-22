@@ -31,7 +31,7 @@ function Admins() {
             setAdmin(data?.admin);
 
             if (!data?.admin) {
-                return navigate('/')
+                // return navigate('/')
             }
             setShow(true);
 
@@ -40,9 +40,9 @@ function Admins() {
     }, [users])
 
 
-    if (!admin || !show) {
-        return null;
-    }
+    // if (!admin || !show) {
+    //     return null;
+    // }
 
     return (
         <div className="font-sans min-h-screen px-10 mmd:px-2" >

@@ -21,8 +21,11 @@ function Navbar({ showModal, session }) {
     const [signOut, loading, error] = useSignOut(auth);
     const [user, loadingState, errorState] = useAuthState(auth);
     const [open, setOpen] = useState(false);
-    const [admin, setAdmin] = useState(false);
+    // const [admin, setAdmin] = useState(false);
     const navigate = useNavigate();
+
+    const admin = user?.email === "nishadhj111@gmail.com"
+
 
 
     const [cart, serCart] = useState([]);
@@ -67,7 +70,7 @@ function Navbar({ showModal, session }) {
         if (users?.firebaseUser?.email && !adminLoading) {
             refetch()
         }
-        setAdmin(data?.admin)
+        // setAdmin(data?.admin)
 
     }, [users, data])
 
