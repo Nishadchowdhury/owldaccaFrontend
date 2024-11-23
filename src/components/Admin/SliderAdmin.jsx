@@ -189,12 +189,14 @@ function SliderAdmin({ adminEmail }) {
                                             <th scope="col" className="mmd:px-1 mmd:py-1  px-6 py-3 text-left text-xs font-medium  uppercase">Picture</th>
 
 
+                                            <th scope="col" className="mmd:px-1 mmd:py-1  px-6 py-3 text-right text-xs font-medium  uppercase">State</th>
+
                                             <th scope="col" className="mmd:px-1 mmd:py-1  px-6 py-3 text-right text-xs font-medium  uppercase">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                                         {
-                                            imagesForSlider && imagesForSlider?.map((src) => (
+                                            imagesForSlider && imagesForSlider?.map(({ src, active }) => (
                                                 <tr key={src} className="">
                                                     <td className="mmd:px-1 mmd:py-1  px-6 w-full md:w-[300px] py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                         <img loading="lazy" className="imgStrictSize" src={src} alt="" />
@@ -203,7 +205,13 @@ function SliderAdmin({ adminEmail }) {
 
 
                                                     <td className="mmd:px-1 mmd:py-1  px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                        <button disabled={true} className={` opacity-40 text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">{active ? "Active" : "Inactive"}</button>
+
+                                                    </td>
+
+                                                    <td className="mmd:px-1 mmd:py-1  px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                         <button disabled={loading} onClick={async () => deleteSlider(src)} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">Delete</button>
+
                                                     </td>
 
 
