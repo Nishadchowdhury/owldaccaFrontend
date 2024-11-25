@@ -17,7 +17,7 @@ function HomePageSlider() {
         ),
         //--------
     )
-
+    console.log(imagesForSlider);
     useEffect(() => {
         setImagesForSlider(data?.sliders?.slider || []);
     }, [data])
@@ -51,11 +51,11 @@ function HomePageSlider() {
                 >
                     {imagesForSlider &&
                         imagesForSlider?.map((image) => (
-                            <SwiperSlide className="rounded-3xl overflow-hidden " key={image + '' + Math.random()}>
+                            <SwiperSlide className="rounded-3xl overflow-hidden " key={image.src + '' + Math.random()}>
                                 <div className=" overflow-hidden flex items-center justify-center ">
                                     <Link to='/' >
                                         <img loading="lazy"
-                                            src={image}
+                                            src={image.src}
                                             alt="sliderImage"
                                             className="min-w-full max-w-full hover:scale-105 transition-all object-cover"
                                         />
