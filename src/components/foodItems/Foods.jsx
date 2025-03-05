@@ -14,7 +14,7 @@ function Foods() {
 
 
     const { isLoading, data, refetch, isRefetching } = useQuery('cuisinesAll' + queryN, () =>
-        fetch(baseURL + "/cuisines/" + (queryN).toString()).then(res =>
+        fetch("/db/foodItems.json").then(res =>
             res.json()
         )
     )
@@ -25,9 +25,8 @@ function Foods() {
         refetch()
     }
 
-
     useEffect(() => {
-        setCuisines(data?.cuisineList || []);
+        setCuisines(data || []);
     }, [data])
 
 
@@ -40,9 +39,9 @@ function Foods() {
 
                 <div className='HomeItemsGridContainer ' >
                     {
-                        cuisines && cuisines.map(({ cuisineId, cuisineData }) => (
+                        cuisines && cuisines.map(({ isExclusive, cuisineImg, _id, name  }) => (
 
-                            <SingleFood isExclusive={cuisineData.isExclusive} picture={cuisineData.cuisineImg} name={cuisineData.name} id={cuisineId} key={cuisineId} />
+                            <SingleFood isExclusive={isExclusive} picture={`/foods/${cuisineImg}`} name={name} id={_id} key={_id} />
 
                         ))
                     }

@@ -1,7 +1,6 @@
 import { BiRightArrowCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
-function SingleRestaurant({ name, picture, id, }) {
-
+function SingleRestaurant({ name, picture, id }) {
 
 
     return (

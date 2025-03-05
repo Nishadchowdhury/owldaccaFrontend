@@ -64,12 +64,12 @@ function Checkout() {
     }
     const email = users?.firebaseUser?.email || "";
     const { isLoading, data } = useQuery('singleCuisine' + params.checkoutType, () =>
-        fetch(baseURL + "/cuisinesOne/" + params.checkoutType).then(res =>
+        fetch("/db/foodItems.json").then(res =>
             res.json()
         ),
         //--------
     )
-    const { cuisineImg, isExclusive, availableAt, findWith, name, price, } = data?.cuisine || {};
+    const { cuisineImg, isExclusive, restaurant: availableAt, findWith, name, price, } = data?.find(item => item._id === params.checkoutType) || {};
 
     const food = {
         cuisineImg,
@@ -248,7 +248,8 @@ function Checkout() {
 
                                             {!isLoading && foods.length > 0 ?
                                                 foods?.map(({ cuisineImg, availableAt, name, price, quantity }) => (
-                                                    <CheckOutPageFood key={cuisineImg + price + name} cuisineImg={cuisineImg}
+                                                    <CheckOutPageFood key={cuisineImg + price + name}
+                                                        cuisineImg={cuisineImg}
                                                         availableAt={availableAt}
                                                         name={name}
                                                         price={price}

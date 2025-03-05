@@ -16,6 +16,9 @@ function CartModal({ visible, showModal }) {
     const [totalPrice, setTotalPrice] = useState(0)
 
     const totalPriceCounter = (latestItems) => {
+
+        console.log(latestItems);
+        
         const totalPriceOfALl = latestItems?.reduce((total, item) => (total + (+item.food.price * +item.quantity)), 0);
         setTotalPrice(totalPriceOfALl)
     }

@@ -5,7 +5,7 @@ import { useState } from "react";
 function FoodWithDetails({ cuisineImg, price, availableAt, isExclusive, name, quantity, setCheck, setError }) {
 
     const [show, setShow] = useState(true)
-
+    
     const food = {
         cuisineImg: cuisineImg,
         price: price,

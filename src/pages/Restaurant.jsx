@@ -1,4 +1,4 @@
-import { baseURL } from "../hooks/envCheck";
+
 import FoodWithDetails from "../components/FoodWithDetails/FoodWithDetails"
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -6,13 +6,25 @@ import Loader from "../components/Loaders/Loader";
 
 function Restaurant() {
     const params = useParams();
+
     const { isLoading, data } = useQuery('singleRestaurant' + params?.restaurantId, () =>
-        fetch(baseURL + "/restaurants/" + params.restaurantId).then(res =>
+        fetch("/db/restaurants.json").then(res =>
             res.json()
         )
     )
 
-    const { closeAt, picture, cuisines, name } = data?.restaurant || {};
+    const { data: cuisines } = useQuery('singleRestaurant' + "cuisines" + params?.restaurantId, () =>
+        fetch("/db/foodItems.json").then(res =>
+            res.json()
+        )
+    )
+
+    const { name } = data?.find(item => item.name === params.restaurantId) || {}
+
+
+
+
+    console.log(cuisines);
 
     return (
 
@@ -29,7 +41,7 @@ function Restaurant() {
 
                                         className="imgStrictSize rounded-t-xl"
                                         alt="Image Description"
-                                        src={picture}
+                                        src={"/restaurants/" + name + ".jpg"}
                                     />
 
                                 </div>
@@ -43,12 +55,12 @@ function Restaurant() {
 
                         <div className="lg:w-3/5 xl:w-2/3 2xl:w-2/3 w-full mt-4 ">
 
-                            {cuisines?.map(({ cuisineImg, price, availableAt, isExclusive, name }) => (
+                            {cuisines?.filter(items => items.restaurant === params.restaurantId).map(({ cuisineImg, price, restaurant, isExclusive, name }) => (
                                 <FoodWithDetails key={name + price + cuisineImg}
                                     name={name}
-                                    cuisineImg={cuisineImg}
+                                    cuisineImg={"/foods/" + cuisineImg}
                                     price={price}
-                                    availableAt={availableAt}
+                                    availableAt={restaurant}
                                     isExclusive={isExclusive}
                                 />
                             ))}

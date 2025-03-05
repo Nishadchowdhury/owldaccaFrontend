@@ -21,8 +21,8 @@ function AddAddress({ visible, showModal }) {
 
     const [text, setText] = useState({ value: '' });
     const [locationObj, setLocationObj] = useState({});
-    const [addressesOfServer, setAddressesOfServer] = useState([]);
-    const [addressesOfServerObjs, setAddressesOfServerObjs] = useState([]);
+    const [addressesOfServer, setAddressesOfServer] = useState(["dummy"]);
+    const [addressesOfServerObjs, setAddressesOfServerObjs] = useState(["dummy"]);
     const [addresses, setAddresses] = useState([...addressesOfServer]);
     const [loading, setLoading] = useState(false);
 
@@ -32,7 +32,7 @@ function AddAddress({ visible, showModal }) {
     const [homeAndStreetAddress, setHomeAndStreetAddress] = useState({ value: "" });
     const [apartmentNo, setApartmentNo] = useState({ value: "" });
     const [showList, setShowList] = useState(false)
-
+ 
 
     //filter on each change of input text
     useEffect(() => {
@@ -97,13 +97,15 @@ function AddAddress({ visible, showModal }) {
         setShowList(false)
     }
 
+    console.log(locationObj);
+
     function AddAddress() {
         setLoading(true)
 
 
-        if (!locationObj?.locationData?.fee) {
-            return
-        }
+        // if (!locationObj?.locationData?.fee) {
+        //     return
+        // }
 
 
         localStorage.setItem("userAddressFee", JSON.stringify(locationObj))
@@ -150,7 +152,8 @@ function AddAddress({ visible, showModal }) {
                                 value={text.value} placeholder={"Select your Area"} type={"text"}
                                 onFocus={() => setShowList(true)}
                                 autocomplate={"off"}
-                                className={`w-full h-10 active:border-none active:outline-none focus:border-none focus:outline-none placeholder-primary  `} />
+                                className={`w-full h-10 active:border-none active:outline-none focus:border-none focus:outline-none placeholder-primary  `}
+                            />
                             <span onClick={resetAddress} className=" w-7 h-7 cursor-pointer " >X</span>
                         </div>
 

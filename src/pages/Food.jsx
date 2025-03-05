@@ -12,11 +12,13 @@ function Food() {
     const params = useParams();
 
     const { isLoading, error, data, refetch } = useQuery('singleCuisine' + params.foodId, () =>
-        fetch(baseURL + "/cuisinesOne/" + params.foodId).then(res =>
+        fetch('/db/foodItems.json').then(res =>
             res.json()
         )
     )
-    const { cuisineImg, isExclusive, availableAt, findWith, name, price, } = data?.cuisine || {};
+    const { cuisineImg, isExclusive, restaurant: availableAt, name, price, } = data?.find(item => item._id === params.foodId) || {};
+
+    console.log(data);
 
     const item = {
         cuisineImg: cuisineImg,

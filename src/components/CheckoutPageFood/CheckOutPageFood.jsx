@@ -3,9 +3,8 @@ import { TbCurrencyTaka } from "react-icons/tb"
 
 function CheckOutPageFood({ cuisineImg, availableAt, name, price, quantity, setError }) {
 
-
     const [show, setShow] = useState(true)
-
+console.log(cuisineImg);
     function imgError() {
         setShow(false)
         setError(true)

@@ -7,16 +7,17 @@ import NetworkIssueModal from '../Modals/NetworkIssueModal';
 import { useEffect, useState } from 'react';
 import { BiRightArrowCircle } from 'react-icons/bi';
 
+
 function Restaurants() {
 
     const [visible, setVisible] = useState(false)
 
     const { isLoading, data } = useQuery('restaurantsAll', () =>
-        fetch(baseURL + '/restaurants').then(res =>
+        fetch('/db/restaurants.json').then(res =>
             res.json()
         )
     )
-    const restaurants = data?.restaurantList || [];
+    const restaurants = data || [];
 
     useEffect(() => {
         if (restaurants.length !== 0) {
@@ -51,8 +52,8 @@ function Restaurants() {
                         </>
                     }
 
-                    {restaurants && !isLoading && restaurants.map(({ restaurantId, restaurantData }) => (
-                        <SingleRestaurant key={restaurantId} id={restaurantId} picture={restaurantData?.picture} name={restaurantData?.name} />
+                    {restaurants && !isLoading && restaurants.map(({ name, }) => (
+                        <SingleRestaurant key={name} id={name} picture={"/restaurants/" + name + ".jpg"} name={name} />
                     ))}
 
                 </div>

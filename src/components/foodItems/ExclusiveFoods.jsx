@@ -6,12 +6,12 @@ import { LoadElement } from '../Restaurants/Restaurants';
 
 function ExclusiveFoods() {
     const { isLoading, error, data, refetch } = useQuery('cuisinesAllExclusive', () =>
-        fetch(baseURL + "/cuisines/1000000000").then(res =>
+        fetch("/db/foodItems.json").then(res =>
             res.json()
         ),
         //--------
     )
-    const cuisines = data?.cuisineList || [];
+    const cuisines = data || [];
 
     return (
         <div className="mt-7">
@@ -21,14 +21,14 @@ function ExclusiveFoods() {
 
                 <div className='HomeItemsGridContainer'>
                     {cuisines &&
-                        cuisines.map(({ cuisineId, cuisineData }) => {
-                            return cuisineData.isExclusive ? (
+                        cuisines.map(({ isExclusive, cuisineImg, name, _id }) => {
+                            return isExclusive ? (
                                 <SingleFood
-                                    isExclusive={cuisineData.isExclusive}
-                                    picture={cuisineData.cuisineImg}
-                                    name={cuisineData.name}
-                                    id={cuisineId}
-                                    key={cuisineId}
+                                    isExclusive={isExclusive}
+                                    picture={`/foods/${cuisineImg}`}
+                                    name={name}
+                                    id={_id}
+                                    key={_id}
                                 />
                             ) : null
                         }

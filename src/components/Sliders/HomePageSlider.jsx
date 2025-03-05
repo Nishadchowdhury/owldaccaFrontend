@@ -9,18 +9,17 @@ import { useQuery } from "react-query";
 
 function HomePageSlider() {
 
-    const [imagesForSlider, setImagesForSlider] = useState([]);
+    const [imagesForSlider, setImagesForSlider] = useState(['/sliderImages/1.jpg', '/sliderImages/2.jpg', '/sliderImages/1.jpg']);
 
-    const { isLoading, error, data, refetch } = useQuery('allSlider', () =>
-        fetch(baseURL + "/sliders").then(res =>
-            res.json()
-        ),
-        //--------
-    )
-    console.log(imagesForSlider);
-    useEffect(() => {
-        setImagesForSlider(data?.sliders?.slider || []);
-    }, [data])
+    // const { isLoading, error, data, refetch } = useQuery('allSlider', () =>
+    //     fetch("/sliderImages").then(res =>
+    //         res.json()
+    //     ),
+    //     //--------
+    // )
+    // useEffect(() => {
+    //     setImagesForSlider(data?.sliders?.slider || []);
+    // }, [data])
 
 
     return (
@@ -53,13 +52,12 @@ function HomePageSlider() {
                         imagesForSlider?.map((image) => (
                             <SwiperSlide className="rounded-3xl overflow-hidden " key={image.src + '' + Math.random()}>
                                 <div className=" overflow-hidden flex items-center justify-center ">
-                                    <Link to='/' >
-                                        <img loading="lazy"
-                                            src={image.src}
-                                            alt="sliderImage"
-                                            className="min-w-full max-w-full hover:scale-105 transition-all object-cover"
-                                        />
-                                    </Link>
+                                    <img
+                                        loading="lazy"
+                                        src={image}
+                                        alt="sliderImage"
+                                        className="min-w-full max-w-full hover:scale-105 transition-all object-cover"
+                                    />
                                 </div>
                             </SwiperSlide>
                         ))}
