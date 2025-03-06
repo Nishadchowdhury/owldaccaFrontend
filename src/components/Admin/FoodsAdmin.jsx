@@ -12,17 +12,16 @@ import imageValidation from "../../hooks/imageValidation";
 import { toast } from "react-toastify";
 
 function FoodsAdmin({ restaurants, refetchRestaurants }) {
-    const restaurantList = restaurants?.restaurantList || [];
+    const restaurantList = restaurants || [];
     // //getting all restaurant
     const { isLoading, error, data, refetch } = useQuery('allCuisines', () =>
-        fetch(baseURL + "/cuisines/10000000").then(res =>
+        fetch("/db/foodItems.json").then(res =>
             res.json()
         ),
         //--------
     )
 
-    const foodList = data?.cuisineList || [];
-
+    const foodList = data || [];
     const { users } = useContext(userContext) || {}
     const user = users?.firebaseUser;
     const navigate = useNavigate();
@@ -48,6 +47,14 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
     const creatingFood = () => toastId.current = toast("Adding a food Item.", {
         position: "top-center",
         autoClose: false,
+        type: toast.TYPE.INFO,
+        theme: "dark",
+        className: "border border-slate-700"
+    });
+
+    const demoPanel = () => toast("Demo admin panel doesn't support any action", {
+        position: "top-center",
+        autoClose: true,
         type: toast.TYPE.INFO,
         theme: "dark",
         className: "border border-slate-700"
@@ -248,7 +255,7 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
                         <div id="segment-3" role="tabpanel3" aria-labelledby="segment-item-3" className="mb-5">
 
 
-                            <Form onSubmit={createFood} className={"flex justify-center mb-5 flex-col"}>
+                            <Form onSubmit={demoPanel} className={"flex justify-center mb-5 flex-col"}>
 
 
 
@@ -330,8 +337,8 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
                                             <option className="bg-background  " ></option>
 
                                             {
-                                                restaurantList && restaurantList.map(({ restaurantData, restaurantId, }) => (
-                                                    <option key={restaurantId} className="bg-background " > {restaurantData.name} </option>
+                                                restaurantList && restaurantList.map(({ name }) => (
+                                                    <option key={name} className="bg-background " > {name} </option>
 
                                                 ))
                                             }
@@ -365,7 +372,7 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
                             <div className="flex flex-col">
                                 <div className="-m-1.5 overflow-x-auto  ">
                                     <div className="p-1.5 min-w-full inline-block align-middle">
-                                        <div className="overflow-hidden">
+                                        <div className="overflow-hidden h-96 overflow-y-scroll ">
                                             <table className="min-w-full divide-y divide-gray-200 text-primary ">
                                                 <thead>
                                                     <tr>
@@ -378,19 +385,21 @@ function FoodsAdmin({ restaurants, refetchRestaurants }) {
                                                         <th scope="col" className="px-6 py-3 text-right text-xs font-medium  uppercase">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                                <tbody className="divide-y overflow-y-scroll divide-gray-200 dark:divide-gray-700">
                                                     {
-                                                        foodList && foodList.map(({ cuisineData, cuisineId, }) => (
-                                                            <tr key={cuisineId} className="">
-                                                                <td className="  w-44  py-4 whitespace-nowrap text-sm font-medium  "><img loading="lazy" className="imgStrictSize border border-gray-400 rounded-lg" src={cuisineData.cuisineImg} alt="" />
+
+
+                                                        foodList && foodList.map(({ cuisineImg, name, availableAt, price }) => (
+                                                            <tr key={"/foods/" + cuisineImg} className="">
+                                                                <td className="  w-44  py-4 whitespace-nowrap text-sm font-medium  "><img loading="lazy" className="imgStrictSize border border-gray-400 rounded-lg" src={"/foods/" + cuisineImg} alt="" />
                                                                 </td>
 
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  ">{cuisineData.name}</td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm  ">{cuisineData.availableAt}</td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm  ">{cuisineData.price} BDT</td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  ">{name}</td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm  ">{availableAt}</td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm  ">{price} BDT</td>
 
                                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                                    <button onClick={async () => deleteAFood({ id: cuisineId, name: cuisineData.name, image: cuisineData.cuisineImg, data: cuisineData })} className="text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2" href="#">Delete</button>
+                                                                    <button onClick={demoPanel} className="text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2" href="#">Delete</button>
                                                                 </td>
                                                             </tr>
                                                         ))

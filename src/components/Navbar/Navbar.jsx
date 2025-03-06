@@ -24,7 +24,7 @@ function Navbar({ showModal, session }) {
     // const [admin, setAdmin] = useState(false);
     const navigate = useNavigate();
 
-    const admin = user?.email === "nishadhj111@gmail.com"
+    const admin = `user?.email === "nishadhj111@gmail.com"`
 
 
 

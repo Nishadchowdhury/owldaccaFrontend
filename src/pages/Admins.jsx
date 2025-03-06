@@ -18,13 +18,12 @@ function Admins() {
     const [admin, setAdmin] = useState(false);
     const [show, setShow] = useState(false);
     //getting all restaurant
-    const { isLoading, error, data, refetch } = useQuery('allRestaurant', () =>
-        fetch(baseURL + "/restaurants/").then(res =>
+    const { isLoading, error, data, refetch } = useQuery('allRestaurants', () =>
+        fetch('/db/restaurants.json').then(res =>
             res.json()
         ),
         //--------
     )
-
     useEffect(() => {
         async function checkAdmin() {
             const data = await fetch(baseURL + "/admins/" + users?.firebaseUser?.email).then(res => res.json())

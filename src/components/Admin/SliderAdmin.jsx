@@ -19,6 +19,15 @@ function SliderAdmin({ adminEmail }) {
 
     const [loading, setLoading] = useState(false)
 
+    const demoPanel = () => toast("Demo admin panel doesn't support any action", {
+        position: "top-center",
+        autoClose: true,
+        type: toast.TYPE.INFO,
+        theme: "dark",
+        className: "border border-slate-700"
+    });
+
+
     const { isLoading, error, data, refetch } = useQuery('allSlider', () =>
         fetch(baseURL + "/sliders").then(res =>
             res.json()
@@ -30,7 +39,7 @@ function SliderAdmin({ adminEmail }) {
         }
     )
     useEffect(() => {
-        setImagesForSlider(data?.sliders.slider)
+        setImagesForSlider(['/sliderImages/1.jpg', '/sliderImages/2.jpg', '/sliderImages/1.jpg'])
     }, [data])
 
 
@@ -130,7 +139,7 @@ function SliderAdmin({ adminEmail }) {
             <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
 
                 <div className="border-b border-slate-600" >
-                    <Form onSubmit={addSlider} >
+                    <Form onSubmit={demoPanel} >
 
                         <div className="grid md:grid-cols-3 md:gap-6 lg:justify-end lg:items-end">
 
@@ -196,7 +205,7 @@ function SliderAdmin({ adminEmail }) {
                                     </thead>
                                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                                         {
-                                            imagesForSlider && imagesForSlider?.map(({ src, active }) => (
+                                            imagesForSlider && imagesForSlider?.map((src) => (
                                                 <tr key={src} className="">
                                                     <td className="mmd:px-1 mmd:py-1  px-6 w-full md:w-[300px] py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                                                         <img loading="lazy" className="imgStrictSize" src={src} alt="" />
@@ -205,12 +214,12 @@ function SliderAdmin({ adminEmail }) {
 
 
                                                     <td className="mmd:px-1 mmd:py-1  px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <button disabled={true} className={` opacity-40 text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">{active ? "Active" : "Inactive"}</button>
+                                                        <button disabled={true} className={` opacity-40 text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">{"Active"}</button>
 
                                                     </td>
 
                                                     <td className="mmd:px-1 mmd:py-1  px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <button disabled={loading} onClick={async () => deleteSlider(src)} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">Delete</button>
+                                                        <button disabled={loading} onClick={demoPanel} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-40"}`} href="#">Delete</button>
 
                                                     </td>
 

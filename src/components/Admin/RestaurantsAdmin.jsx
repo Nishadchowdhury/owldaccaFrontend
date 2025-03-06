@@ -88,7 +88,7 @@ function RestaurantsAdmin({ data, refetch }) {
 
     useEffect(() => {
         if (pageName === "delete") {
-            setRestaurantList(data?.restaurantList)
+            setRestaurantList(data || {})
         }
     }, [pageName, data])
 
@@ -202,31 +202,44 @@ function RestaurantsAdmin({ data, refetch }) {
         setLoading(true)
         const ask = window.confirm(`do you want to delete __${name}__ write ${name} here.`)
 
-        function getImgName(url) {
-            const parts = url.split("/");
-            return parts[parts.length - 1];
-        }
-        if (ask) {
-            const response = await fetch(baseURL + "/restaurants/" + id, {
-                method: "DELETE",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({ adminId: user?.email, image: getImgName(image) })
-            })
+        demoPanel()
 
-            const ok = await response.json()
-            console.log(ok)
-            if (ok.status == 200) {
-                console.log(ok)
-                refetch()
-                setLoading(false)
-            }
-        }
+        // function getImgName(url) {
+        //     const parts = url.split("/");
+        //     return parts[parts.length - 1];
+        // }
+        // if (ask) {
+        //     const response = await fetch(baseURL + "/restaurants/" + id, {
+        //         method: "DELETE",
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json;charset=UTF-8'
+        //         },
+        //         body: JSON.stringify({ adminId: user?.email, image: getImgName(image) })
+        //     })
+
+        //     const ok = await response.json()
+        //     console.log(ok)
+        //     if (ok.status == 200) {
+        //         console.log(ok)
+        //         refetch()
+        //         setLoading(false)
+        //     }
+        // }
         setLoading(false)
         return;
     }
+
+    const demoPanel = () => toast("Demo admin panel doesn't support any action", {
+        position: "top-center",
+        autoClose: true,
+        type: toast.TYPE.INFO,
+        theme: "dark",
+        className: "border border-slate-700"
+    });
+
+
+    console.log(restaurantList);
 
     return (
         <div className="hs-accordion bg-slate-800 rounded-xl px-3" id="hs-basic-with-title-and-arrow-stretched-heading-two">
@@ -438,7 +451,7 @@ function RestaurantsAdmin({ data, refetch }) {
                             <div className="flex flex-col">
                                 <div className="-m-1.5 overflow-x-auto  ">
                                     <div className="p-1.5 min-w-full inline-block align-middle">
-                                        <div className="overflow-hidden">
+                                        <div className="h-96 overscroll-y-scroll">
                                             <table className="min-w-full divide-y divide-gray-200 text-primary ">
                                                 <thead>
                                                     <tr>
@@ -450,19 +463,19 @@ function RestaurantsAdmin({ data, refetch }) {
                                                         <th scope="col" className="px-6 py-3 text-right text-xs font-medium  uppercase">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                                <tbody className="divide-y overflow-y-scroll divide-gray-200 dark:divide-gray-700">
 
                                                     {
 
-                                                        restaurantList && restaurantList.map(({ restaurantData, restaurantId, }) => (
-                                                            <tr key={restaurantId} className="">
-                                                                <td className="px-6 w-44  py-4 whitespace-nowrap text-sm font-medium  dark:text-gray-200"><img loading="lazy" className="imgStrictSize border border-gray-400 rounded-lg" src={restaurantData.picture} alt="" /></td>
+                                                        restaurantList && restaurantList.map(({ name }) => (
+                                                            <tr key={name} className="">
+                                                                <td className="px-6 w-44  py-4 whitespace-nowrap text-sm font-medium  dark:text-gray-200"><img loading="lazy" className="imgStrictSize border border-gray-400 rounded-lg" src={`/restaurants/${name}.jpg`} alt="" /></td>
 
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  dark:text-gray-200">{restaurantData.name}</td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm  dark:text-gray-200">{restaurantId}</td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  dark:text-gray-200">{name}</td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-sm  dark:text-gray-200">xxxxxx_demo</td>
 
                                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                                    <button disabled={loading} onClick={async () => deleteARestaurant({ id: restaurantId, name: restaurantData.name, image: restaurantData.picture })} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-30"}`} href="#">
+                                                                    <button disabled={loading} onClick={async () => deleteARestaurant({ id: name, name: name, image: `/restaurants/${name}.jpg` })} className={`text-blue-500 hover:text-blue-200 rounded-md border border-slate-500 hover:border-slate-400 px-3 py-2 ${loading && "opacity-30"}`} href="#">
                                                                         Delete
                                                                     </button>
                                                                 </td>

@@ -18,6 +18,13 @@ function DeliveryLocationsAdmin({ adminEmail }) {
     const [locationName, setLocationName] = useState('')
     const [locationFee, setLocationFee] = useState('')
 
+    const demoPanel = () => toast("Demo admin panel doesn't support any action", {
+        position: "top-center",
+        autoClose: true,
+        type: toast.TYPE.INFO,
+        theme: "dark",
+        className: "border border-slate-700"
+    });
 
     const { isLoading, data, refetch } = useQuery('getAllDeliveryLocations', () =>
         fetch(baseURL + "/deliveryLocations").then(res =>
@@ -105,7 +112,7 @@ function DeliveryLocationsAdmin({ adminEmail }) {
             <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
 
                 <div className="border-b border-slate-600" >
-                    <Form onSubmit={addLocation} >
+                    <Form onSubmit={demoPanel} >
 
                         <div className="grid md:grid-cols-3 md:gap-6 mt-3">
 
